@@ -1,0 +1,30 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap'); */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    #root{
+        max-width: 1440px;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+    },
+    body,.btn,h2,h5,h5{
+        @apply font-sans
+    }
+    h1{
+        @apply font-serif text-secondary-100 text-6xl leading-7xl font-bold;
+    }
+    p{
+        @apply text-secondary-200 font-normal font-serif
+    }
+    a.active{
+        @apply text-blue;
+    }
+    .font-outline-1 {
+        -webkit-text-stroke: 1px #C18653;
+        @apply opacity-50;
+      }
+}
