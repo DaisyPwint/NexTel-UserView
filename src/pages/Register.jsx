@@ -1,9 +1,21 @@
+import { useEffect } from "react"
 import Alert from "antd/es/alert/Alert"
 import {ConfigProvider} from 'antd'
 import RegisterSummary from "../components/summary/RegisterSummary"
 import ContactForm from "../components/form/ContactForm"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const Register = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const state  = location?.state || {};
+
+  useEffect(() => {
+    if (!location.state || !location.state.searchData || !location.state.rooms || !location.state.totalQuantity || !location.state.totalPrice) {
+      navigate('/');
+    }
+  }, [location.state,navigate]);
+
   return (
     <section className="container mx-auto">
         <ConfigProvider theme={{
@@ -21,7 +33,7 @@ const Register = () => {
             />
         </ConfigProvider>
         <div className="flex gap-7 mt-8 mb-8">        
-            <RegisterSummary/>        
+            <RegisterSummary state={state} />        
             <ContactForm/>
         </div>
     </section>

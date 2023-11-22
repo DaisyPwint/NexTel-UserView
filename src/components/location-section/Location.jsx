@@ -5,7 +5,7 @@ const Location = () => {
   return (
     <section className="container mx-auto mt-44">
         <HomeTitle text="Explore Our Location"/>
-        <div className="flex mt-20">
+        <div className="flex lg:flex-row flex-col mt-20">
           <div className="flex-1 flex-col">
            <div>
               <p>Address</p>

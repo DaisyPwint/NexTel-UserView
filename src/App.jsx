@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Detail from "./components/rooms-section/Detail"
 import Available from "./pages/Available"
 import Register from "./pages/Register"
+import RegisterRouteGuard from "./components/guards/RegisterRouteGuard"
 
 function App() {
 
@@ -13,8 +14,8 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>} />
           <Route path="detail" element={<Detail/>}/>
-          <Route path="available" element={<Available/>}/>
-          <Route path="register" element={<Register/>}/>
+          <Route path="search" element={<Available/>}/>
+          <Route path="register" element={<RegisterRouteGuard><Register/></RegisterRouteGuard>}/>
         </Route>        
       </Routes>
     </Router>

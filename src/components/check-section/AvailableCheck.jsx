@@ -3,27 +3,30 @@ import { DatePicker,Space, theme, Dropdown, Button} from "antd";
 const { RangePicker } = DatePicker;
 import { DownOutlined } from '@ant-design/icons'
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 import customParseFormat from 'dayjs/plugin/customParseFormat'; 
-import { useDispatch } from "react-redux";
-import { checkAvailable } from "../../features/availability/checkSlice";
-// import { useCheckRoomMutation } from "../../features/availability/checkApiSlice";
+import { useCheckRoomMutation } from "../../features/availability/checkApiSlice";
 dayjs.extend(customParseFormat);
+import { setData,setError } from "../../features/availability/checkSlice";
+import { useDispatch } from "react-redux";
 
 const disabledDate = (current) => {
     return current && current < dayjs().endOf('day');
 }
 
 const showDateFormat = "DD MMM YYYY";
+const urlDateFormat = "YYYY-MM-DD";
 const tomorrow = dayjs().add(1,'day');
 const dayAfterTomorrow = tomorrow.add(1,'day');
-const customDateFormat = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"; // Custom format for ISO 8601
+// const customDateFormat = "YYYY-MM-DDTHH:mm:ss.SSS[Z]"; // Custom format for ISO 8601
 
 const { useToken } = theme;
 
 const AvailableCheck = () => {
     const { token } = useToken();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    // const [checkRoom] = useGetAvailabilityQuery();
+    const [checkRoom] = useCheckRoomMutation();
     const [date,setDate] = useState([tomorrow,dayAfterTomorrow])
     const [options,setOptions] = useState({
         room: 1,
@@ -77,30 +80,45 @@ const AvailableCheck = () => {
             }
     }
   
-    const handleSearch = () => {
-      
-      const checkIn = date[0].format(customDateFormat);
-      const checkOut = date[1].format(customDateFormat);
+  
+    const handleSearch = async () => {
+
+      const checkIn = date[0].format(urlDateFormat);
+      const checkOut = date[1].format(urlDateFormat);
       const room = options.room;
       const adult = options.adult;
       const children = options.children;
-      // const numberOfGuest = options.adult + options.children;
       const checkData = {checkIn,checkOut,room,adult,children};
-      // console.log({checkIn,checkOut,room,numberOfGuest});
-      dispatch(checkAvailable(checkData))
-      // to give check-in and check-out to backend 
-      // checkRoom(checkIn,checkOut);
+
+      const {data, error} = await checkRoom({checkIn,checkOut});
+
+      dispatch(setData(data));
+      console.log(data,error);
+      if (error && error.status === 400) {
+        const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';
+        
+        dispatch(setError(error));
+        console.log(errorMessage);
+      }
+
+      if(data){
+        const searchParams = new URLSearchParams(checkData);
+        const searchUrl = `/search?${searchParams.toString()}`;
+
+        navigate(searchUrl);
+      }
     }
 
   return (
-    <div className="bg-secondary-50 h-14">
-        <Space direction="horizontal">
+    <div className="bg-secondary-50 h-14 p-[10px]">
+        <div className="flex md:flex-row sm:flex-col">
         <RangePicker
           disabledDate={disabledDate}
           value={date}
           // defaultValue={[dayjs(tomorrow, showDateFormat), dayjs(dayAfterTomorrow, showDateFormat)]}
           format={showDateFormat}
           onChange={onChange}
+          className="border-4 outline-none"
         />
           <Dropdown trigger={['click']}
           dropdownRender={() => (
@@ -142,9 +160,9 @@ const AvailableCheck = () => {
                 </Space>
               </a>
             </div>
-            </Dropdown>
-            <Button onClick={handleSearch}>Search</Button>
-        </Space>
+          </Dropdown>
+          <Button onClick={handleSearch}>Search</Button>
+        </div>
     </div>
   )
 }

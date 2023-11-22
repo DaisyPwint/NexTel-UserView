@@ -1,25 +1,50 @@
-import { DownOutlined} from "@ant-design/icons"
+import { DownOutlined, UpOutlined} from "@ant-design/icons"
+import { Collapse } from "antd";
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { setBookingDetail } from "../../features/booking/bookingSlice";
+import { useState } from "react";
 
-const AvailableSummary = ({room}) => {
-  console.log(room);
-  return (
-    <div className="flex flex-col lg:sticky fixed w-full left-0 lg:top-[100px] bottom-0 text-left gap-5 bg-secondary-50 py-6 px-8 shadow-lg border-[0.3px] border-secondary-200">
+const AvailableSummary = ({searchData}) => {
+  const {rooms,totalQuantity,totalPrice} = useSelector(state => state.cart);
+  const [activeKey,setActiveKey] = useState(["1"]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // console.log(searchData,rooms,totalQuantity,totalPrice);
+
+  const items = [
+    {
+      key: '1',
+      label: <>{
         <div className="flex justify-between">
             <div>
               <p>You selected</p>
-              <p>{`${room ? room : 0} ${room >1  ? 'rooms' : 'room'}`}</p>
+              <p>{`${totalQuantity} ${totalQuantity === 1 || totalQuantity === 0 ? 'room' : 'rooms'}`}</p>
             </div>
-            <div>
-              <DownOutlined className="border-[1px] border-secondary-200 p-1"/>
-            </div>
+            {/* <Button roomType="text" icon={<DownOutlined/>} onClick={() => setActiveKey(hasRooms ? ['1'] : [])}></Button> */}
         </div>
-        <p>{room} x Superior Room</p>
+      }</>,
+      children: <>{rooms.map((room) => (
+        <p key={room.roomType}>{`${room.quantity} x ${room.roomType}`}</p>
+      ))}</>
+    },
+  ]
+
+  const addBookingDetail = () => {
+    dispatch(setBookingDetail({searchData,rooms,totalQuantity,totalPrice}))
+    navigate('/register',{state: {searchData,rooms,totalQuantity,totalPrice}})
+  }
+
+  return (
+    <div className="flex flex-col lg:sticky lg:top-[100px] fixed w-full left-0 bottom-0 text-left gap-5 bg-secondary-50 py-6 px-8 shadow-lg border-[0.3px] border-secondary-200">
+        <Collapse activeKey={activeKey} items={items} bordered="false" showArrow="false" expandIcon={({ isActive }) => isActive ? <DownOutlined /> : <UpOutlined />} expandIconPosition="end" onChange={(keys) => setActiveKey(keys)}>
+        </Collapse>
         <div className="border-[0.3px] border-secondary-200"/>
         <div className="flex justify-between">
             <p>Total Price</p>
-            <p>USD 796</p>
+            <p>USD {totalPrice}</p>
         </div>
-        <button className="bg-primary p-2 text-secondary-50">Next</button>
+        <button className="bg-primary p-2 text-secondary-50" onClick={addBookingDetail}>Next</button>
     </div>
   )
 }
