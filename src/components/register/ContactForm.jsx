@@ -4,7 +4,7 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import styles from './contactForm.module.css'
-import Rules from "../Rules";
+import Rules from "./components/Rules";
 import { addUserInfo } from "../../features/booking/bookingSlice";
 import { useDispatch,useSelector } from "react-redux";
 import { calculateTotalNights } from "../dateUtils";

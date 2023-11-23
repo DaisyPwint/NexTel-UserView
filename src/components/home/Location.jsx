@@ -1,5 +1,5 @@
 import HomeTitle from "../title/HomeTitle"
-import Map from './Map';
+import Map from './components/Map';
 
 const Location = () => {
   return (

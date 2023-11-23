@@ -2,14 +2,15 @@ import { useState } from "react";
 import { DatePicker,Space, theme, Dropdown, Button} from "antd";
 const { RangePicker } = DatePicker;
 import { DownOutlined } from '@ant-design/icons'
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useCheckRoomMutation } from "../../../features/availability/checkApiSlice";
+import { setData,setError } from "../../../features/availability/checkSlice";
+
 import dayjs from "dayjs";
 import customParseFormat from 'dayjs/plugin/customParseFormat'; 
-import { useNavigate } from "react-router-dom";
-import { useCheckRoomMutation } from "../../features/availability/checkApiSlice";
-import { setData,setError } from "../../features/availability/checkSlice";
-import { useDispatch } from "react-redux";
-
 dayjs.extend(customParseFormat);
+
 const disabledDate = (current) => {
     return current && current < dayjs().endOf('day');
 }
@@ -21,19 +22,16 @@ const dayAfterTomorrow = tomorrow.add(1,'day');
 
 const { useToken } = theme;
 
-const UpdateCheck = ({searchData}) => {
-
+const AvailableCheck = () => {
     const { token } = useToken();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [checkRoom] = useCheckRoomMutation();
-    const checkIn = searchData?.checkIn ? dayjs(searchData?.checkIn) : tomorrow; 
-    const checkOut = searchData?.checkOut ? dayjs(searchData?.checkOut) : dayAfterTomorrow;
-    const [date,setDate] = useState([checkIn,checkOut])
+    const [date,setDate] = useState([tomorrow,dayAfterTomorrow])
     const [options,setOptions] = useState({
-        room: searchData?.room ? parseInt(searchData?.room) : 1,
-        adult: searchData?.adult ? parseInt(searchData?.adult) : 1 ,
-        children: searchData?.children ? parseInt(searchData?.children) : 0
+        room: 1,
+        adult: 1,
+        children: 0
     })
 
     const contentStyle = {
@@ -81,44 +79,47 @@ const UpdateCheck = ({searchData}) => {
               }
             }
     }
-
+  
+  
     const handleSearch = async () => {
+
       const checkIn = date[0].format(urlDateFormat);
       const checkOut = date[1].format(urlDateFormat);
       const room = options.room;
-      
+      const adult = options.adult;
+      const children = options.children;
+      const checkData = {checkIn,checkOut,room,adult,children};
+
       const {data, error} = await checkRoom({checkIn,checkOut});
 
+      dispatch(setData(data));
       console.log(data,error);
-      dispatch(setData(data))
       if (error && error.status === 400) {
         const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';
-        dispatch(setError(error))
+        
+        dispatch(setError(error));
         console.log(errorMessage);
       }
 
       if(data){
-        const searchParams = new URLSearchParams({
-          checkIn: date[0].format(urlDateFormat),
-          checkOut: date[1].format(urlDateFormat),
-          room,
-          adult: options.adult,
-          children: options.children,
-        });
+        const searchParams = new URLSearchParams(checkData);
         const searchUrl = `/search?${searchParams.toString()}`;
+
         navigate(searchUrl);
       }
     }
 
   return (
-    <div className="bg-secondary-50 h-14">
+    <div className="bg-secondary-50 h-14 p-[10px]">
         <div className="flex md:flex-row sm:flex-col">
-          <RangePicker
-            disabledDate={disabledDate}
-            value={date}
-            format={showDateFormat}
-            onChange={onChange}
-          />
+        <RangePicker
+          disabledDate={disabledDate}
+          value={date}
+          // defaultValue={[dayjs(tomorrow, showDateFormat), dayjs(dayAfterTomorrow, showDateFormat)]}
+          format={showDateFormat}
+          onChange={onChange}
+          className="border-4 outline-none"
+        />
           <Dropdown trigger={['click']}
           dropdownRender={() => (
             <div style={contentStyle}>
@@ -166,4 +167,4 @@ const UpdateCheck = ({searchData}) => {
   )
 }
 
-export default UpdateCheck
+export default AvailableCheck

@@ -1,5 +1,5 @@
 import HeroImg from '../../assets/Hero.png';
-import AvailableCheck from '../check-section/AvailableCheck';
+import AvailableCheck from './components/AvailableCheck';
 
 const HeroSection = () => {
 

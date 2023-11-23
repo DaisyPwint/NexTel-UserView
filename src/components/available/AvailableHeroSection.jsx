@@ -1,5 +1,5 @@
 import Superior from '../../assets/Superior.png';
-import UpdateCheck from "../check-section/UpdateCheck"
+import UpdateCheck from "./components/UpdateCheck"
 
 const AvailableHeroSection = ({searchData}) => {
 

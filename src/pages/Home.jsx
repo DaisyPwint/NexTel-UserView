@@ -1,7 +1,4 @@
-import Facilities from "../components/facilities-section/Facilities"
-import HeroSection from "../components/hero-section/HeroSection"
-import Location from "../components/location-section/Location"
-import DisplayRooms from "../components/rooms-section/DisplayRooms"
+import {Facilities,HeroSection,Location,DisplayRooms} from "../components/home"
 
 const Home = () => {
   return (

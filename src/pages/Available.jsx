@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import AvailableHeroSection from '../components/hero-section/AvailableHeroSection';
-import AvailableRooms from '../components/rooms-section/AvailableRooms';
+import { AvailableHeroSection, AvailableRooms} from '../components/available';
 
 const Available = () => {
   const location = useLocation();

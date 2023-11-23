@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import Alert from "antd/es/alert/Alert"
 import {ConfigProvider} from 'antd'
-import RegisterSummary from "../components/summary/RegisterSummary"
-import ContactForm from "../components/form/ContactForm"
+import {RegisterSummary} from "../components/register"
+import {ContactForm} from "../components/register"
 import { useLocation, useNavigate } from "react-router-dom"
 
 const Register = () => {

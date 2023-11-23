@@ -2,7 +2,7 @@ import { DownOutlined, UpOutlined} from "@ant-design/icons"
 import { Collapse } from "antd";
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom";
-import { setBookingDetail } from "../../features/booking/bookingSlice";
+import { setBookingDetail } from "../../../features/booking/bookingSlice";
 import { useState } from "react";
 
 const AvailableSummary = ({searchData}) => {

@@ -1,4 +1,4 @@
-import image from '../../assets/Superior.png';
+import image from '../../../assets/Superior.png';
 
 const Detail = () => {
   return (
