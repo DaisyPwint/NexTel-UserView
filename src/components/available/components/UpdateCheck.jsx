@@ -89,7 +89,7 @@ const UpdateCheck = ({searchData}) => {
       
       const {data, error} = await checkRoom({checkIn,checkOut});
 
-      console.log(data,error);
+      console.log(error);
       dispatch(setData(data))
       if (error && error.status === 400) {
         const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';

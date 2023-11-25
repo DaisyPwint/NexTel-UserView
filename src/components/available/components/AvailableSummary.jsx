@@ -10,7 +10,6 @@ const AvailableSummary = ({searchData}) => {
   const [activeKey,setActiveKey] = useState(["1"]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(searchData,rooms,totalQuantity,totalPrice);
 
   const items = [
     {

@@ -10,14 +10,12 @@ const bookingSlice = createSlice({
     initialState,
     reducers: {
         setBookingDetail: (state,{payload}) => {
-            console.log(payload);
             return {
                 ...state,
                 details: payload
             }
         },
         addUserInfo : (state,{payload}) => {
-            console.log(payload);
             return {
                 ...state,
                 userInfo : payload

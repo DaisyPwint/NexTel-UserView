@@ -88,14 +88,13 @@ const ContactForm = () => {
       return;
     }
 
-    try {
-      const {data} = await addBooking(bookingData);
-      console.log(data);
+      const {data,error} = await addBooking(bookingData);
       message.success('Form submitted successfully!');
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      message.error('Error submitting form. Please try again later.');
-    }
+      if (error && error.status === 400) {
+        const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';
+        
+        console.log(errorMessage);
+      }
   }
 
   return (

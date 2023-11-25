@@ -13,7 +13,6 @@ const roomsArray = (end) => {
 const AvailableRooms = ({searchData}) => {
   const dispatch = useDispatch();
   const {data} = useSelector(state => state.check);
-  console.log(data);
   const userRoom = searchData?.room;
   // const [roomTypes, setRoomTypes] = useState({});
   // const [selectedRoom, setSelectedRoom] = useState({});
@@ -42,7 +41,6 @@ const AvailableRooms = ({searchData}) => {
     
       const typeArr = Object.keys(roomTypes); //[ "Deluxe Single", "Deluxe Double", "Family Double" ]
       const roomArr = Object.values(roomTypes);// [2,0,0]
-      console.log(typeArr,roomArr);
       const totalOtherRooms = roomArr
       .filter((_, index) => typeArr[index] !== roomType)
       .reduce((acc, quantity) => acc + quantity, 0);
