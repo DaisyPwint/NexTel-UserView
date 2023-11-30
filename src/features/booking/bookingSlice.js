@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     details : null,
-    userInfo : null
+    userInfo : null,
+    successData: null
 }
 
 const bookingSlice = createSlice({

@@ -32,7 +32,7 @@ const Register = () => {
             showIcon
             />
         </ConfigProvider>
-        <div className="flex gap-7 mt-8 mb-8">        
+        <div className="flex lg:flex-row flex-col gap-4 mt-8 mb-8">        
             <RegisterSummary state={state} />        
             <ContactForm/>
         </div>

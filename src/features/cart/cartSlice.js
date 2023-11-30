@@ -73,10 +73,17 @@ const cartSlice = createSlice({
         } ,
         addSelectedRoom : (state,{payload}) => {
           state.selectedRoom = payload;
+        },
+        clearCart: (state) => {
+          state.rooms = [],
+          state.totalQuantity =  0,
+          state.totalPrice = 0,
+          state.roomTypes = {},
+          state.selectedRoom= {}
         }
     }
 })
 
-export const { addRoomToCart,addAllRoomTypes,addSelectedRoom } = cartSlice.actions;
+export const { addRoomToCart,addAllRoomTypes,addSelectedRoom,clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

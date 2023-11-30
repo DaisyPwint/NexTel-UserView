@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { DownOutlined , UpOutlined} from "@ant-design/icons"
+import { CheckCircleOutlined, DownOutlined , UpOutlined} from "@ant-design/icons"
 import { Collapse } from "antd";
 import { Link } from 'react-router-dom';
 import { calculateTotalNights } from '../dateUtils';
@@ -20,7 +20,7 @@ const RegisterSummary = ({state}) => {
             <div className="flex justify-between">
                 <div>
                   <p>You selected</p>
-                  <p>{`${totalQuantity} ${totalQuantity === 1 || totalQuantity === 0 ? 'room' : 'rooms'}`}</p>
+                  <p className='font-medium mb-2'>{`${totalQuantity} ${totalQuantity === 1 || totalQuantity === 0 ? 'room' : 'rooms'}`}</p>
                 </div>
                 {/* <Button roomType="text" icon={<DownOutlined/>} onClick={() => setActiveKey(hasRooms ? ['1'] : [])}></Button> */}
             </div>
@@ -32,7 +32,7 @@ const RegisterSummary = ({state}) => {
       ]
 
   return (
-    <div className="w-72 text-left">
+    <div className="lg:w-72 w-full text-left pl-2">
         <p className="mb-3">Booking Summary</p>
         <div className="bg-secondary-50 shadow-lg border-[0.3px] border-secondary-200 mb-3">
             <div className="bg-primary p-2 pl-5">
@@ -41,19 +41,19 @@ const RegisterSummary = ({state}) => {
             <div className="p-5 flex flex-col gap-3">
                 <div className="flex justify-between">
                     <div className="flex flex-col">
-                        <p>Check-in</p>
-                        <p>{checkIn}</p>
-                        <p>From 02:00 PM</p>
+                        <p className='mb-2 text-gray-50 lg:text-base text-sm'>Check-in</p>
+                        <p className='text-gray-100 font-medium lg:text-xl'>{checkIn}</p>
+                        <p className='text-secondary-400 lg:text-base text-xs'>From 02:00 PM</p>
                     </div>
                     <div className="flex flex-col">
-                        <p>Check-out</p>
-                        <p>{checkOut}</p>
-                        <p>From 12:00 PM</p>
+                        <p className='mb-2 text-gray-50 lg:text-base text-sm'>Check-out</p>
+                        <p className='text-gray-100 font-medium lg:text-xl'>{checkOut}</p>
+                        <p className='text-secondary-400 lg:text-base text-xs'>From 12:00 PM</p>
                     </div>
                 </div>
                 <div>
                     <p>Total length of stay:</p> <br />
-                    <p>{`${totalNight} ${totalNight > 1 ? 'nights' : 'night'}`}</p>
+                    <p className='font-medium mt-2'>{`${totalNight} ${totalNight > 1 ? 'nights' : 'night'}`}</p>
                 </div>
                 <div className="border-[0.3px] border-secondary-200"/>
                 {/* <div className="flex justify-between">
@@ -64,19 +64,19 @@ const RegisterSummary = ({state}) => {
                 </Collapse>
                 <Link
                 to={`/search?${searchParams.toString()}`}
-                className="underline">Change your selection</Link>
+                className="underline underline-offset-2 mt-3 block w-fit">Change your selection</Link>
             </div>
         </div>
         <div className="shadow-lg border-[0.3px] border-secondary-200">
             <div className="bg-secondary-100 p-2 pl-5 border-b-[1px] border-secondary-200">
-                <p>Your price summary</p>
+                <p className='text-gray-100 px-6 py-2 bg-secondary-50 lg:text-xl font-medium'>Your price summary</p>
             </div>
-            <div className="bg-secondary-50 p-5">
-                <div className="flex justify-between mb-2">
+            <div className="bg-[#E6FEDB]   text-gray-100 p-5">
+                <div className="flex items-center justify-between lg:text-3xl md:text-2xl font-medium mb-2">
                     <p>Total</p>
-                    <p>USD {totalPrice}</p>
+                    <p className='font-serif font-bold'>USD {totalPrice}</p>
                 </div>
-                <p>included in price...</p>
+                <p className='lg:text-sm text-xs'>Included in price : 5% tax and 10% service charge.</p>
             </div>
         </div>
     </div>

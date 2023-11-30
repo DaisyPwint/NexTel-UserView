@@ -14,4 +14,4 @@ const typeApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const { useGetRoomTypeQuery,useGetAllAmenitiesQuery,useGetTypeByIdQuery } = typeApiSlice;
+export const { useGetAllTypeQuery,useGetAllAmenitiesQuery,useGetTypeByIdQuery } = typeApiSlice;

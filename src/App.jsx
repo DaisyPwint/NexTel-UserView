@@ -5,6 +5,7 @@ import Detail from "./components/home/components/Detail"
 import Available from "./pages/Available"
 import Register from "./pages/Register"
 import RegisterRouteGuard from "./components/guards/RegisterRouteGuard"
+import RegisterSuccessful from "./components/register/RegisterSuccessful"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="detail/:id" element={<Detail/>}/>
           <Route path="search" element={<Available/>}/>
           <Route path="register" element={<RegisterRouteGuard><Register/></RegisterRouteGuard>}/>
+          <Route path="success" element={<RegisterSuccessful/>}/>
         </Route>        
       </Routes>
     </Router>

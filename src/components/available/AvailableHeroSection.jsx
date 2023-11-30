@@ -27,7 +27,7 @@ const AvailableHeroSection = ({searchData}) => {
         }
       </Carousel>  
         <div className='container mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-        <h1 className="font-bold uppercase lg:text-[70px] md:text-[60px] text-[50px] mb-10 text-secondary-50">
+        <h1 className="font-bold uppercase lg:text-[70px] md:text-[60px] text-[30px] md:mb-10 mb-7 mt-10 text-secondary-50">
           Enjoy Your Own Holiday
         </h1>
         <UpdateCheck searchData={searchData} />

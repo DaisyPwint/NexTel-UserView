@@ -68,36 +68,36 @@ const AvailableCheck = () => {
       const children = options.children;
       const checkData = {checkIn,checkOut,room,adult,children};
 
-      // const {data, error} = await checkRoom({checkIn,checkOut});
+      const {data, error} = await checkRoom({checkIn,checkOut});
 
-      // dispatch(setData(data));
-      // console.log(error);
-      // if (error && error.status === 400) {
-      //   const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';
+      dispatch(setData(data));
+      console.log(error);
+      if (error && error.status === 400) {
+        const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';
         
-      //   dispatch(setError(error));
-      //   console.log(errorMessage);
-      // }
+        dispatch(setError(error));
+        console.log(errorMessage);
+      }
 
-      // if(data){
+      if(data){
         const searchParams = new URLSearchParams(checkData);
         const searchUrl = `/search?${searchParams.toString()}`;
 
         navigate(searchUrl);
-      // }
+      }
     }
 
   return (
-    <div className="flex md:flex-row sm:flex-col items-center">
+    <div className="flex md:flex-row flex-col items-center">
       <div className="border-4 border-secondary-50 p-1">
-        <DateRangePicker date={date} onChange={handleDateChange} className="h-14 border-0 lg:!h-14 md:!h-10 sm:!h-9 !rounded-sm lg:w-[330px] md:w-[250px] sm:w-[330px] cursor-pointer inputFont" />
+        <DateRangePicker date={date} onChange={handleDateChange} className="h-14 border-0 lg:!h-14 md:!h-10  !rounded-sm lg:w-[330px] md:w-[250px] w-[354px] cursor-pointer inputFont" />
       </div>      
       <div className="border-4 border-secondary-50 p-1">
-        <GuestSelector options={options} onGuestChange={handleGuestChange} maxPeoplePerRoom={maxPeoplePerRoom} className="flex bg-secondary-50 p-1 lg:!h-14 md:!h-10 sm:!h-9 rounded-sm lg:w-[330px] md:w-[250px] sm:w-[330px]"/>
+        <GuestSelector options={options} onGuestChange={handleGuestChange} maxPeoplePerRoom={maxPeoplePerRoom} className="flex bg-secondary-50 p-1 lg:!h-14 md:!h-10 !h-9 rounded-sm lg:w-[330px] md:w-[250px] w-[354px]"/>
       </div>
       <div className="border-4 border-secondary-50 p-1">
         <SearchButton onClick={handleSearch}       
-        className="lg:!h-14 md:!h-10 sm:!h-9 px-4 lg:w-[130px] md:w-[100px] sm:w-[330px] text-white rounded-sm bg-primary text-secondary-50 hover:!text-secondary-50 border-0 lg:text-[18px]">Search</SearchButton>
+        className="lg:!h-14 md:!h-10 !h-9 px-4 lg:w-[130px] md:w-[100px] w-[354px] text-white rounded-sm bg-primary text-secondary-50 hover:!text-secondary-50 border-0 lg:text-[18px]">Search</SearchButton>
       </div>      
     </div>
   )

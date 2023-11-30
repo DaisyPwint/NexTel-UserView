@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:wght@300;400;500&family=Roboto:wght@400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,12 +11,7 @@
         text-align: center;
         box-sizing: border-box;
     }
-    /* body,.btn,h2,h5,h5{
-        @apply font-sans
-    } */
-    h1{
-        @apply font-serif text-secondary-100 text-6xl leading-7xl font-bold;
-    }
+    
     /* p{
         @apply text-secondary-200 font-normal font-serif
     }
@@ -26,6 +22,18 @@
         @apply opacity-50;
       }
 }*/
+}
+
+@layer components{
+    .base-btn{
+        @apply h-10 px-4 rounded-sm border duration-300 hover:opacity-80 font-sans
+    }
+    .border-btn{
+        @apply base-btn border-secondary-400 text-gray-100
+    }
+    .color-btn{
+        @apply base-btn border-primary bg-primary text-secondary-100
+    }
 }
 
 /* title color */
@@ -87,6 +95,18 @@
     margin-inline: 0;
     opacity: 100%;
 }
+
+/* ribbon */
+.ribbon::after{
+    content: "";
+    position: absolute;
+    border-top: 16px solid #F5222D;
+    border-right: 16px solid transparent;
+    bottom: -17px;
+    width: 18px;
+    right: 0;
+}
+/* after:content-[''] after:absolute after:border-t-[16px] after:border-t-red after:border-r-[16px] after:border-r-secondary-50 after:bottom-[-17px] after:w-[18px] after:right-0 */
 
 @media screen and (max-width: 1128px)  {
     .inputFont .ant-picker-input input{

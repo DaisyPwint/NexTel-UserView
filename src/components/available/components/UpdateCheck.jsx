@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { DateRangePicker } from "../../DateRangePicker";
 import { GuestSelector } from "../../GuestSelector";
 import { SearchButton } from "../../SearchButton";
+import { clearCart } from "../../../features/cart/cartSlice";
 
 dayjs.extend(customParseFormat);
 const disabledDate = (current) => {
@@ -110,12 +111,14 @@ const UpdateCheck = ({searchData}) => {
         });
       const searchUrl = `/search?${searchParams.toString()}`;
         navigate(searchUrl);
+        dispatch(clearCart());
+
       // }
     }
 
   return (
-    <div className="bg-secondary-50/50 backdrop-blur-xl p-6 sm:mb-2">
-        <div className="flex z-10 md:flex-row sm:flex-col gap-6">
+    <div className="bg-secondary-50/50 backdrop-blur-xl p-6 mb-2">
+        <div className="flex z-10 md:flex-row flex-col gap-6">
           <DateRangePicker date={date} onChange={onDateChange} className="border-0 lg:!h-14 md:!h-12 sm:!h-10 !rounded-sm lg:w-[450px] md:w-[250px] sm:w-[330px] cursor-pointer inputFont"/>          
           <GuestSelector options={options} onGuestChange={onGuestChange} maxPeoplePerRoom={maxPeoplePerRoom} className="flex bg-secondary-50 py-2 sm:py-[0.65rem] lg:!h-14 md:!h-12 sm:!h-10 rounded-sm lg:w-[500px] md:w-[250px] sm:w-[330px]"/>
           <SearchButton onClick={handleSearch} className="lg:!h-14 md:!h-12 sm:!h-10 px-4 lg:w-[150px] md:w-[100px] sm:w-[330px] text-white rounded-sm bg-primary text-secondary-50 hover:!text-secondary-50 border-0 lg:text-[18px]">Update</SearchButton>

@@ -43,7 +43,9 @@ export default {
         50: '#fff',
         100: '#FAFAFA',
         200: '#BFBFBF',
-        300: '#D9D9D9'
+        300: '#D9D9D9',
+        400: '#595959',
+        500: "#8C8C8C"
       },
       gray: {
         50: '#434343',
@@ -52,7 +54,11 @@ export default {
         300: '#000',
       },
       blue: "#1A73E8",
-      red: "#F5222D"
+      red: "#F5222D",
+      yellow: {
+        50: "#FDC463",
+        100: "#FAC663"
+      }
     },
     extend: {
       lineHeight: {
