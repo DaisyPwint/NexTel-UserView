@@ -38,7 +38,7 @@ const GuestSelector = ({ options, onGuestChange, maxPeoplePerRoom, className }) 
                 value={options.adult}
                 onChange={(operation) => onGuestChange("adult", operation)}
                 label="Ages 15 or above"
-                disabledDecrement={options.adult <= 1}
+                disabledDecrement={options.adult <= 1 || options.adult === options.room}
                 disabledIncrement={
                   options.room * maxPeoplePerRoom <=
                   options.adult + options.children
@@ -60,14 +60,14 @@ const GuestSelector = ({ options, onGuestChange, maxPeoplePerRoom, className }) 
         )}
         className={className}
       >
-        <p className="flex-1 justify-center lg:text-[18px] cursor-pointer">
+        <div className="flex-1 justify-center lg:text-[18px] cursor-pointer">
           <Space size={"large"}>
             {`${options.room} Room . ${options.adult} Adult . ${
               options.children
             } ${options.children === 0 || options.children === 1 ? "Child" : "Children"}`}
             <DownOutlined />
           </Space>
-        </p>
+        </div>
       </Dropdown>
   );
 };
@@ -81,10 +81,10 @@ const GuestSection = ({
   disabledIncrement,
 }) => {
   return (
-    <div className="flex justify-between m-2">
+    <div className="flex justify-between m-2 font-sans">
       <div className="flex flex-col">
-        <span>{title}</span> 
-        {label && <span className="text-xs text-gray-50 font-normal">{label}</span>}
+        <span className="text-lg">{title}</span> 
+        {label && <span className="text-md text-gray-50 font-normal">{label}</span>}
       </div>
       <div className="flex items-center gap-3">
         <button

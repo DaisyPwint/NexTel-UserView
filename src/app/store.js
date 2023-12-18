@@ -1,15 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "./services/apiSlice";
 import cartReducer from "../features/cart/cartSlice";
 import bookingReducer from "../features/booking/bookingSlice";
+import typeReducer from "../features/roomType/typeSlice";
+import checkReducer from "../features/availability/checkSlice";
 
 const store = configureStore({
     reducer: {
-            [apiSlice.reducerPath]: apiSlice.reducer, 
             cart: cartReducer,
-            booking:  bookingReducer
+            booking:  bookingReducer,
+            type: typeReducer,
+            check: checkReducer
         },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
     devTools: true
 });
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal } from 'antd'
-import { useGetAllAmenitiesQuery } from '../../features/roomType/typeApiSlice'
 
 // const amenities = [
 //     {
@@ -20,16 +19,7 @@ import { useGetAllAmenitiesQuery } from '../../features/roomType/typeApiSlice'
 //     }
 // ]
 
-const Allamenities = ({openModal,setOpenModal}) => {
-  const {data:amenities,isLoading,error} =  useGetAllAmenitiesQuery();
-
-  if(isLoading){
-    return <p>Loading...</p>
-  }
-
-  if(error){
-    return <p>error</p>
-  }
+const Allamenities = ({amenities,openModal,setOpenModal}) => {
 
   return (
     <Modal  open={openModal} footer={null} closeIcon={false} width={716} >

@@ -4,8 +4,8 @@ import Home from "./pages/Home"
 import Detail from "./components/home/components/Detail"
 import Available from "./pages/Available"
 import Register from "./pages/Register"
-import RegisterRouteGuard from "./components/guards/RegisterRouteGuard"
-import RegisterSuccessful from "./components/register/RegisterSuccessful"
+import { RegisterSuccessful } from "./components/register"
+import {RegisterRouteGuard,SuccessRouteGuard} from "./guards"
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
           <Route path="detail/:id" element={<Detail/>}/>
           <Route path="search" element={<Available/>}/>
           <Route path="register" element={<RegisterRouteGuard><Register/></RegisterRouteGuard>}/>
-          <Route path="success" element={<RegisterSuccessful/>}/>
+          <Route path="success" element={<SuccessRouteGuard><RegisterSuccessful/></SuccessRouteGuard>}/>
         </Route>        
       </Routes>
     </Router>

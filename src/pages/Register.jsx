@@ -25,14 +25,14 @@ const Register = () => {
                 },
             }
         }}>
-            <Alert className="text-left mt-28"
+            <Alert className="text-left mt-14 font-sans"
             message="Notice"
             description="Payment must be made within 24 hours..."
             type="info"
             showIcon
             />
         </ConfigProvider>
-        <div className="flex lg:flex-row flex-col gap-4 mt-8 mb-8">        
+        <div className="flex lg:flex-row flex-col lg:gap-4 gap-8 mt-8 mb-8">        
             <RegisterSummary state={state} />        
             <ContactForm/>
         </div>

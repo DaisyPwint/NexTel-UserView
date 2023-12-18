@@ -1,12 +1,16 @@
 import { Carousel } from 'antd';
 import Superior from '../../assets/Superior.png';
 import UpdateCheck from "./components/UpdateCheck"
+import HotelBar from '../../assets/hotel-bar.jpg';
+import HotelGym from '../../assets/hotel-gym.jpg';
+import HotelMeeting from '../../assets/hotel-meeting.jpg';
+import HotelSwimmingPool from '../../assets/hotel-swimming-pool.jpg';
 
 const slideImgs = [
-  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  HotelBar,
+  HotelGym,
+  HotelMeeting,
+  HotelSwimmingPool,
   Superior
 ]
 

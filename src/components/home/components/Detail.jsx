@@ -1,44 +1,15 @@
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import image from '../../../assets/Superior.png';
-import { useGetTypeByIdQuery } from '../../../features/roomType/typeApiSlice';
 import { Link } from 'react-router-dom';
+import { roomById } from '../../../features/roomType/typeSlice';
 
 const Detail = () => {
   const {id} = useParams();
-
-  const {data:roomDetail,isLoading,error} = useGetTypeByIdQuery(id);
-
-//   const roomDetail = {
-//     "id": 4,
-//     "name": "Deluxe Family",
-//     "maximumCapacity": 5,
-//     "size": "80",
-//     "pricePerNight": 500,
-//     "description": "The Deluxe Family Room, with its king-sized bed and high-quality linens, ensures a restful sleep. It includes a modern bathroom, a seating area, and a flat-screen TV. Complimentary Wi-Fi, a stocked mini-bar, and a safe are also provided. Large windows offer city views. Guests have access to 24-hour room service. This room is a blend of comfort and luxury, perfect for both business and leisure stays.",
-//     "totalRoom": 4,
-//     "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//     "amenities":  [
-//       {
-//           "id": 1,
-//           "name": "Comfortable Beds",
-//           "icon": "bed"
-//       },
-//       {
-//           "id": 2,
-//           "name": "Private Bathroom",
-//           "icon": "bathroom"
-//       },
-//       {
-//           "id": 3,
-//           "name": "Towels and Toiletries",
-//           "icon": "dry-cleaning"
-//       }
-//   ]
-// }
+  const roomDetail = useSelector(state => roomById(state,parseInt(id)));
 
 const renderOverview = () => (
   <>
-    <p className='font-serif text-3xl font-bold text-gray-100 mt-10'>Overview</p>
+    <p className='font-serif text-3xl font-bold text-gray-100 mt-10 md:mt-0'>Overview</p>
     <div className='flex flex-col gap-2 mt-8'>
       {renderOverviewItem('Price per night', `USD ${roomDetail?.pricePerNight}`, "font-serif text-xl font-bold")}
       {renderOverviewItem('Size', `${roomDetail?.size} m²`)}
@@ -71,13 +42,6 @@ const renderAmenity = (amenity) => (
   </div>
 );
 
-if(isLoading){
-    return <p>Loading...</p>
-  }
-
-  if(error){
-    return <p>error</p>
-  }
   
   return (
     <section className='pb-12 text-left pl-2'>

@@ -1,105 +1,94 @@
-import { useGetAllAmenitiesQuery } from "../../features/roomType/typeApiSlice"
 import HomeTitle from "../title/HomeTitle"
 
-// const amenities = [
-//   {
-//       "id": 1,
-//       "name": "Comfortable Beds",
-//       "icon": "bed"
-//   },
-//   {
-//       "id": 2,
-//       "name": "Private Bathroom",
-//       "icon": "bathroom"
-//   },
-//   {
-//       "id": 3,
-//       "name": "Towels and Toiletries",
-//       "icon": "dry-cleaning"
-//   },
-//   {
-//     "id": 4,
-//     "name": "Comfortable Beds",
-//     "icon": "bed"
-// },
-// {
-//     "id": 5,
-//     "name": "Private Bathroom",
-//     "icon": "bathroom"
-// },
-// {
-//     "id": 6,
-//     "name": "Towels and Toiletries",
-//     "icon": "dry-cleaning"
-// },
-// {
-//   "id": 7,
-//   "name": "Comfortable Beds",
-//   "icon": "bed"
-// },
-// {
-//   "id": 8,
-//   "name": "Private Bathroom",
-//   "icon": "bathroom"
-// },
-// {
-//   "id": 9,
-//   "name": "Towels and Toiletries",
-//   "icon": "dry-cleaning"
-// },
-// {
-//   "id": 10,
-//   "name": "Private Bathroom",
-//   "icon": "bathroom"
-// },
-// {
-//   "id": 11,
-//   "name": "Towels and Toiletries",
-//   "icon": "dry-cleaning"
-// },
-// {
-// "id": 12,
-// "name": "Comfortable Beds",
-// "icon": "bed"
-// },
-// {
-// "id": 13,
-// "name": "Private Bathroom",
-// "icon": "bathroom"
-// },
-// {
-// "id": 14,
-// "name": "Towels and Toiletries",
-// "icon": "dry-cleaning"
-// },
-// {
-// "id": 15,
-// "name": "Comfortable Beds",
-// "icon": "bed"
-// },
-// {
-// "id": 16,
-// "name": "Private Bathroom",
-// "icon": "bathroom"
-// },
-// {
-// "id": 17,
-// "name": "Towels and Toiletries",
-// "icon": "dry-cleaning"
-// }
-// ]
+const amenities = [
+  {
+      "id": 1,
+      "name": "Comfortable Beds",
+      "icon": "bed"
+  },
+  {
+      "id": 2,
+      "name": "Private Bathroom",
+      "icon": "bathroom"
+  },
+  {
+      "id": 3,
+      "name": "Towels and Toiletries",
+      "icon": "dry-cleaning"
+  },
+  {
+    "id": 4,
+    "name": "Housekeeping",
+    "icon": "bed"
+},
+{
+    "id": 5,
+    "name": "Elevator",
+    "icon": "bathroom"
+},
+{
+    "id": 6,
+    "name": " Wake-up Service",
+    "icon": "dry-cleaning"
+},
+{
+  "id": 7,
+  "name": "Private Bathroom",
+  "icon": "bed"
+},
+{
+  "id": 8,
+  "name": "Television",
+  "icon": "bathroom"
+},
+{
+  "id": 9,
+  "name": "Breakfast",
+  "icon": "dry-cleaning"
+},
+{
+  "id": 10,
+  "name": "Min-fridge",
+  "icon": "bathroom"
+},
+{
+  "id": 11,
+  "name": "In-room Jacuzzi",
+  "icon": "dry-cleaning"
+},
+{
+"id": 12,
+"name": "Private Living Room",
+"icon": "bed"
+},
+{
+"id": 13,
+"name": "Pool",
+"icon": "bathroom"
+},
+{
+"id": 14,
+"name": "Room Service",
+"icon": "dry-cleaning"
+},
+{
+"id": 15,
+"name": "Chair",
+"icon": "bed"
+},
+{
+"id": 16,
+"name": "Dinner",
+"icon": "bathroom"
+},
+{
+"id": 17,
+"name": "Ironing Facilities",
+"icon": "dry-cleaning"
+}
+]
 
 const Facilities = () => {
-
-  const {data:amenities,isLoading,error} = useGetAllAmenitiesQuery();
-
-  if(isLoading){
-    return <p>Loading...</p>
-  }
-
-  if(error){
-    return <p>error</p>
-  }
 
   return (
     <section className="container mx-auto lg:mt-44 mt-24 mb-24 lg:mb-44 flex lg:flex-row flex-col">

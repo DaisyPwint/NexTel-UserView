@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useCheckRoomMutation } from "../../../features/availability/checkApiSlice";
 import { setData,setError } from "../../../features/availability/checkSlice";
 
 import dayjs from "dayjs";
@@ -16,7 +15,6 @@ const dayAfterTomorrow = tomorrow.add(1,'day');
 const AvailableCheck = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [checkRoom] = useCheckRoomMutation();
     const [date,setDate] = useState([tomorrow,dayAfterTomorrow])
     const [options,setOptions] = useState({
         room: 1,
@@ -57,9 +55,8 @@ const AvailableCheck = () => {
               }
             }
     }
-  
-  
-    const handleSearch = async () => {
+    
+    const handleSearch = () => {
 
       const checkIn = date[0].format(urlDateFormat);
       const checkOut = date[1].format(urlDateFormat);
@@ -68,23 +65,13 @@ const AvailableCheck = () => {
       const children = options.children;
       const checkData = {checkIn,checkOut,room,adult,children};
 
-      const {data, error} = await checkRoom({checkIn,checkOut});
+      dispatch(setData(checkData));
+      dispatch(setError("'Unknown error'"));
 
-      dispatch(setData(data));
-      console.log(error);
-      if (error && error.status === 400) {
-        const errorMessage = error.data && error.data.message ? error.data.message : 'Unknown error';
-        
-        dispatch(setError(error));
-        console.log(errorMessage);
-      }
+      const searchParams = new URLSearchParams(checkData);
+      const searchUrl = `/search?${searchParams.toString()}`;
 
-      if(data){
-        const searchParams = new URLSearchParams(checkData);
-        const searchUrl = `/search?${searchParams.toString()}`;
-
-        navigate(searchUrl);
-      }
+      navigate(searchUrl);
     }
 
   return (

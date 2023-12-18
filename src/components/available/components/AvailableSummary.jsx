@@ -32,7 +32,6 @@ const AvailableSummary = ({searchData}) => {
   ]
 
   const addBookingDetail = () => {
-    console.log(searchData);
     dispatch(setBookingDetail({searchData,rooms,totalQuantity,totalPrice}))
     if(totalQuantity === 0){
       setOpenModal(true);
@@ -44,7 +43,7 @@ const AvailableSummary = ({searchData}) => {
   return (
    <>
     <div className="flex flex-col lg:sticky lg:top-[100px] fixed w-full left-0 bottom-0 text-left gap-5 bg-secondary-50 py-6 px-8 shadow-lg border-[0.3px] border-secondary-200 z-[2]">
-        <Collapse items={items} bordered="false" showArrow="false" expandIcon={({ isActive }) => isActive ? <DownOutlined /> : <UpOutlined />} expandIconPosition="end" onChange={(keys) => setActiveKey(keys)}>
+        <Collapse items={items} bordered="false" showArrow="false" expandIcon={({ isActive }) => isActive ? <DownOutlined /> : <UpOutlined />} expandIconPosition="end" onChange={(keys) => setActiveKey(keys)} className="font-sans">
         </Collapse>
         <div className="border-[0.3px] border-secondary-200"/>
         <div className="flex justify-between">
@@ -53,16 +52,12 @@ const AvailableSummary = ({searchData}) => {
         </div>
         <button className="bg-primary p-2 text-secondary-50" onClick={addBookingDetail}>Next</button>
     </div>
-    {
-      openModal && (
-        <Modal centered open={openModal} footer={null} onCancel={() => setOpenModal(false)} width={300}>
-          <div className="flex flex-col items-center justify-center">
-            <img src={noRoomType} alt="error image" className='w-[100px] h-[100px]'/>
-            <p className='text-secondary-500'>Please select one or more options you want to reserve room!</p>
-          </div>
-        </Modal>
-      )
-    }
+    <Modal centered open={openModal} footer={null} onCancel={() => setOpenModal(false)} width={300}>
+      <div className="flex flex-col items-center justify-center">
+        <img src={noRoomType} alt="error image" className='w-[100px] h-[100px]'/>
+        <p className='text-secondary-500'>Please select one or more options you want to reserve room!</p>
+      </div>
+    </Modal>
    </>
   )
 }

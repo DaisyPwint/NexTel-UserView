@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     details : null,
     userInfo : null,
-    successData: null
+    bookingData: null
 }
 
 const bookingSlice = createSlice({
@@ -21,11 +21,17 @@ const bookingSlice = createSlice({
                 ...state,
                 userInfo : payload
             }
-        } 
+        } ,
+        addBookingData : (state,{payload}) => {
+            return {
+                ...state,
+                bookingData: payload
+            }
+        }
     }
 })
 
-export const {setBookingDetail,addUserInfo} = bookingSlice.actions;
+export const {setBookingDetail,addUserInfo,addBookingData} = bookingSlice.actions;
 
 export default bookingSlice.reducer;
 

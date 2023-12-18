@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import AvailableTitle from "../title/AvailableTitle"
 import Superior from '../../assets/Superior.png';
 import { Select} from "antd";
@@ -9,113 +9,119 @@ import { calculateTotalNights } from "../dateUtils";
 import noRoomType from "../../assets/no-roomType.png";
 import RoomCardHeader from "./components/RoomCardHeader";
 import Allamenities from "./Allamenities";
+import { searchedData } from '../../features/availability/checkSlice';
 
 const roomsArray = (end) => {
   return Array.from({length: end + 1},(_,index) => index);
 }
 
-// const data = [
-//     {
-//         "type": {
-//             "id": 1,
-//             "name": "Deluxe Single",
-//             "maximumCapacity": 1,
-//             "size": "50",
-//             "pricePerNight": 100,
-//             "description": "Our Deluxe Single Room offers a plush single bed with high-quality linens for a restful sleep. It includes a work desk, complimentary Wi-Fi, and an en-suite bathroom with premium toiletries. Additional amenities include a flat-screen TV, mini-bar, in-room safe, and 24-hour room service. Experience comfort and convenience in the heart of the city.",
-//             "totalRoom": 8,
-//             "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//             "amenities": [
-//                 {
-//                     "id": 1,
-//                     "name": "Comfortable Beds",
-//                     "icon": "Comfortable Beds"
-//                 },
-//                 {
-//                     "id": 6,
-//                     "name": "Air Conditioning/Heating",
-//                     "icon": "Air Conditioning/Heating"
-//                 },
-//                 {
-//                     "id": 28,
-//                     "name": "In-Room Jacuzzi",
-//                     "icon": "In-Room Jacuzzi"
-//                 }
-//             ]
-//         },
-//         "available": 8
-//     },
-//     {
-//         "type": {
-//             "id": 2,
-//             "name": "Deluxe Double",
-//             "maximumCapacity": 2,
-//             "size": "80",
-//             "pricePerNight": 200,
-//             "description": "The Deluxe Single Room, with its king-sized bed and high-quality linens, ensures a restful sleep. It includes a modern bathroom, a seating area, and a flat-screen TV. Complimentary Wi-Fi, a stocked mini-bar, and a safe are also provided. Large windows offer city views. Guests have access to 24-hour room service. This room is a blend of comfort and luxury, perfect for both business and leisure stays.",
-//             "totalRoom": 20,
-//             "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//             "amenities": [
-//                 {
-//                     "id": 1,
-//                     "name": "Comfortable Beds",
-//                     "icon": "Comfortable Beds"
-//                 },
-//                 {
-//                     "id": 6,
-//                     "name": "Air Conditioning/Heating",
-//                     "icon": "Air Conditioning/Heating"
-//                 },
-//                 {
-//                     "id": 28,
-//                     "name": "In-Room Jacuzzi",
-//                     "icon": "In-Room Jacuzzi"
-//                 }
-//             ]
-//         },
-//         "available": 0
-//     },
-//     {
-//       "type": {
-//           "id": 3,
-//           "name": "Deluxe Double",
-//           "maximumCapacity": 2,
-//           "size": "80",
-//           "pricePerNight": 200,
-//           "description": "The Deluxe Single Room, with its king-sized bed and high-quality linens, ensures a restful sleep. It includes a modern bathroom, a seating area, and a flat-screen TV. Complimentary Wi-Fi, a stocked mini-bar, and a safe are also provided. Large windows offer city views. Guests have access to 24-hour room service. This room is a blend of comfort and luxury, perfect for both business and leisure stays.",
-//           "totalRoom": 20,
-//           "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//           "amenities": [
-//               {
-//                   "id": 1,
-//                   "name": "Comfortable Beds",
-//                   "icon": "Comfortable Beds"
-//               },
-//               {
-//                   "id": 6,
-//                   "name": "Air Conditioning/Heating",
-//                   "icon": "Air Conditioning/Heating"
-//               },
-//               {
-//                   "id": 28,
-//                   "name": "In-Room Jacuzzi",
-//                   "icon": "In-Room Jacuzzi"
-//               }
-//           ]
-//       },
-//       "available": 4
-//   }
-// ]
+const data = [
+    {
+        "type": {
+            "id": 1,
+            "name": "Deluxe Single",
+            "maximumCapacity": 1,
+            "size": "50",
+            "pricePerNight": 100,
+            "description": "Our Deluxe Single Room offers a plush single bed with high-quality linens for a restful sleep. It includes a work desk, complimentary Wi-Fi, and an en-suite bathroom with premium toiletries. Additional amenities include a flat-screen TV, mini-bar, in-room safe, and 24-hour room service. Experience comfort and convenience in the heart of the city.",
+            "totalRoom": 8,
+            "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "amenities": [
+              {
+                "id": 4,
+                "name": "Housekeeping",
+                "icon": "bed"
+              },
+              {
+                "id": 28,
+                "name": "In-Room Jacuzzi",
+                "icon": "hot_tub"
+            },
+              {
+                "id": 7,
+                "name": "Pool",
+                "icon": "pool"
+              },
+              {
+                "id": 3,
+                "name": "Towels and Toiletries",
+                "icon": "dry-cleaning"
+            }
+            ]
+        },
+        "available": 8
+    },
+    {
+        "type": {
+            "id": 2,
+            "name": "Deluxe Double",
+            "maximumCapacity": 2,
+            "size": "80",
+            "pricePerNight": 200,
+            "description": "The Deluxe Single Room, with its king-sized bed and high-quality linens, ensures a restful sleep. It includes a modern bathroom, a seating area, and a flat-screen TV. Complimentary Wi-Fi, a stocked mini-bar, and a safe are also provided. Large windows offer city views. Guests have access to 24-hour room service. This room is a blend of comfort and luxury, perfect for both business and leisure stays.",
+            "totalRoom": 20,
+            "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "amenities": [
+                {
+                    "id": 1,
+                    "name": "Comfortable Beds",
+                    "icon": "bed"
+                },
+                {
+                    "id": 6,
+                    "name": "Private Living Room",
+                    "icon": "living"
+                },
+                {
+                    "id": 28,
+                    "name": "In-Room Jacuzzi",
+                    "icon": "hot_tub"
+                }
+            ]
+        },
+        "available": 0
+    },
+    {
+      "type": {
+          "id": 3,
+          "name": "Deluxe Double",
+          "maximumCapacity": 2,
+          "size": "80",
+          "pricePerNight": 200,
+          "description": "The Deluxe Single Room, with its king-sized bed and high-quality linens, ensures a restful sleep. It includes a modern bathroom, a seating area, and a flat-screen TV. Complimentary Wi-Fi, a stocked mini-bar, and a safe are also provided. Large windows offer city views. Guests have access to 24-hour room service. This room is a blend of comfort and luxury, perfect for both business and leisure stays.",
+          "totalRoom": 20,
+          "imageUrl": "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=2874&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          "amenities": [
+            {
+              "id": 8,
+              "name": "Television",
+              "icon": "tv"
+            },
+            {
+              "id": 9,
+              "name": "Breakfast",
+              "icon": "brunch_dining"
+            },
+            {
+              "id": 10,
+              "name": "Min-fridge",
+              "icon": "kitchen"
+            }
+          ]
+      },
+      "available": 4
+  }
+]
 
 const AvailableRooms = ({searchData}) => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false)
-  const {data} = useSelector(state => state.check);
+  const [amenitiesData, setAmenitiesData] = useState(null);
   const userRoom = searchData?.room;
   // const [roomTypes, setRoomTypes] = useState({});
   // const [selectedRoom, setSelectedRoom] = useState({});
 
-  const {rooms:selectRooms,roomTypes,selectedRoom} = useSelector(state => state.cart);
+  const {_,roomTypes,selectedRoom} = useSelector(state => state.cart);
    
   const totalNight = calculateTotalNights(searchData?.checkIn,searchData?.checkOut);
 
@@ -135,8 +141,8 @@ const AvailableRooms = ({searchData}) => {
     dispatch(addRoomToCart({id,roomType,quantity,pricePerNight,roomTypes}));
   }
 
-  const handleAllAmenities = () => {
-    //data from amenities api
+  const handleAllAmenities = (amenities) => {
+    setAmenitiesData(amenities);
     setOpenModal(true);
   }
 
@@ -175,7 +181,6 @@ changing the dates, the number of guests or room(s).</p>
               // const isSelectedRoom = selectRooms?.find(item => item.roomType === room.type.name);
               // console.log(isSelectedRoom);
               // selectedRoom=> { "Deluxe Double": 2, "Deluxe Single": 1 }
-              console.log(selectedRoom[room.type.name]);
               // const selectedRooms = Object.entries(selectedRoom)?.find(key => key[0] === room.type.name);
               // console.log(selectedRooms);// [ "Deluxe Single", 1 ] [ "Deluxe Double", 2 ]  [ "Deluxe Double", 2 ] to [{},{}] don't want to get duplicate key 
               
@@ -186,7 +191,7 @@ changing the dates, the number of guests or room(s).</p>
                 { icon: 'check_circle', label: <span className="font-medium">Bed type</span>, content: ` : Twin` },
                 { icon: 'check_circle', label: <span className="font-medium">Occupancy</span>, content: ` : ${room.type.maximumCapacity}` },
                 { icon: 'check_circle', content: 'Television, Wi-fi, Air-condition' },
-                { icon: 'add_circle', blueIcon: 'text-blue', content: <a onClick={handleAllAmenities} className="underline text-blue cursor-pointer">See all amenities</a> },
+                { icon: 'add_circle', blueIcon: 'text-blue', content: <a onClick={() => handleAllAmenities(room.type.amenities)} className="underline text-blue cursor-pointer">See all amenities</a> },
               ]
 
               const optionalItems = [
@@ -194,10 +199,10 @@ changing the dates, the number of guests or room(s).</p>
               ]
 
               return (
-                  <>
+                  <React.Fragment key={room.type.id} >
                     {
                     room?.available > 0 ? (
-                      <div key={room.type.id} className="shadow-lg mb-10 border border-solid border-secondary-200 relative">
+                      <div className="shadow-lg mb-10 border border-solid border-secondary-200 relative">
                         
                         <RoomCardHeader price={room.type.pricePerNight} available={room?.available} name={room?.type?.name} />
                         <div className="bg-secondary-200">
@@ -286,7 +291,7 @@ changing the dates, the number of guests or room(s).</p>
                           </div>
                         )
                   }
-                  </>
+                  </React.Fragment>
               )
             })
           }  
@@ -300,7 +305,7 @@ changing the dates, the number of guests or room(s).</p>
       }
       </section>
       {
-        openModal && <Allamenities openModal={openModal} setOpenModal={setOpenModal}/>
+        openModal && <Allamenities amenities={amenitiesData} openModal={openModal} setOpenModal={setOpenModal}/>
       }
     </>
   )
