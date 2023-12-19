@@ -192,8 +192,8 @@ const onFinishFailed = () => {
                 <Checkbox checked={checkValue} onChange={onCheck}>Agree to our hotel&apos;s booking policies and terms and conditions. Please review your reservation details carefully.</Checkbox>
             </Form.Item>
             <div className={`mt-10 flex items-center gap-10 justify-center`}>
-                <button onClick={closeModal} className={`border-btn min-w-[170px]`} >Cancel</button>
-                <button type={"button"} onClick={onSubmit} className={`color-btn disabled:bg-secondary-200 disabled:border-none min-w-[170px] disabled:cursor-not-allowed disabled:hover:opacity-100`} disabled={!checkValue} >Confirm</button>
+                <button onClick={closeModal} className={`border-btn md:min-w-[170px] min-w-[120px]`} >Cancel</button>
+                <button type={"button"} onClick={onSubmit} className={`color-btn disabled:bg-secondary-200 disabled:border-none md:min-w-[170px] min-w-[120px] disabled:cursor-not-allowed disabled:hover:opacity-100`} disabled={!checkValue} >Confirm</button>
             </div>
         </Modal>
    </>
